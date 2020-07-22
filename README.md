@@ -1,5 +1,7 @@
 # AssemblerExercises
 
+It is a set of tasks performed within the subject of computer architecture. I use MASM compiler and Visual Studio 2019
+
 ## Program 1
 
 EN: A program adapted to call from the C language level with a prototype float number_pi. It should determine the number Pi by calculating the product of n consecutive sequence elements:
