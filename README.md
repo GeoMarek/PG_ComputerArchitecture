@@ -16,3 +16,8 @@ EN: The program int is_inside(int x, int y, int z, int r, int h) checks if the p
 
 PL: Program int is_inside(int x, int y, int z, int r, int h) sprawdza, czy punkt o współrzędnych x, y i z znajduje się wewnątrz walca o promieniu r i wysokości h, gdzie jego środek podstawy znajduje się w środku układu współrzędnych, zaś oś walca leży na osi Z układu. Zwraca 1 jeśli jest wewnątrz i 0, w przeciwnym wypadku. 
 
+## Program 3
+
+PL: Program do wywołania w C o prototypie char* join_words(char* sep, char** list, int n, char* buf) powinien w bufore zapisywać kolejne podtablice listy oddzielone separatorem. Funkcja zwraca adres wynikowej tablicy.
+
+EN: The program to be called in C with the prototype char* join_words(char* sep, char** list, int n, char* buf) should write successive list sub-tabs separated by a separator in the buffer. The function returns the address of the resulting array.

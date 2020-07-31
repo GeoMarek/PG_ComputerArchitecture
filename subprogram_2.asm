@@ -44,8 +44,6 @@ mov ESP, EBP
 pop EBP
 ret
 
-
-
 outside:
 mov EAX, 0
 mov ESP, EBP
