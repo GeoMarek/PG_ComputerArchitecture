@@ -24,12 +24,15 @@
   <ItemGroup>
     <MASM Include="subprogram_1.asm" />
     <MASM Include="subprogram_2.asm" />
+    <MASM Include="subprogram_3.asm" />
+    <MASM Include="subprogram_4.asm" />
+    <MASM Include="subprogram_5.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{E6878A4C-B77A-4D1F-8EC4-EED714E87B8A}</ProjectGuid>
     <RootNamespace>AssemblerExercises</RootNamespace>
-    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">

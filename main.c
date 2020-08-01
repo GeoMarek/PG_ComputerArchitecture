@@ -2,6 +2,8 @@
 extern float number_pi(int n);
 extern int is_inside(int x, int y, int z, int r, int h);
 extern char* join_words(char* sep, char** list, int n, char* buf);
+extern int count_set_bits(int num);
+extern int multiply_by_ten(int num);
 
 int main() {
 	/* subprogram 1 - approximate number pi */
@@ -28,7 +30,7 @@ int main() {
 	//printf("Result is: %i\n", ret);
 	
 	/* subprogram 3 - swap word in text */
-	int n;
+	/*int n;
 	int chars = 0;
 	printf("Enter number of words:");
 	scanf_s("%d", &n, 80);
@@ -45,8 +47,17 @@ int main() {
 	char* buf = (char*)malloc(sizeof(char) * chars + 10 * n * 2);
 	memset(buf, 0, sizeof(char) * chars + 10 * n * 2);
 	char* c = join_words(sep, list, n, buf);
-	printf(c);
-	
+	printf(c);*/
+
+	/* subprogram 4 - count set bits in number */
+	//for (int i = 0; i < 20; ++i) {
+	//	printf("num: %i\t bits: %i\n", i, count_set_bits(i));
+	//}
+
+	/* subprogram 5 - multiply by ten without mul/imul */
+	for (int i = 0; i < 20; ++i) {
+		printf("num: %i\t ret: %i\n", i, multiply_by_ten(i));
+	}
 
 
 	return 0;

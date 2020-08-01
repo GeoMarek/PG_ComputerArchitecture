@@ -21,3 +21,15 @@ PL: Program int is_inside(int x, int y, int z, int r, int h) sprawdza, czy punkt
 PL: Program do wywołania w C o prototypie char* join_words(char* sep, char** list, int n, char* buf) powinien w bufore zapisywać kolejne podtablice listy oddzielone separatorem. Funkcja zwraca adres wynikowej tablicy.
 
 EN: The program to be called in C with the prototype char* join_words(char* sep, char** list, int n, char* buf) should write successive list sub-tabs separated by a separator in the buffer. The function returns the address of the resulting array.
+
+## Program 4
+
+PL: Program o prototypie int count_set_bit(int num) który służy do zliczania ilości bitów ustawionych na jeden.
+
+EN: A program with the prototype int count_set_bit(int num) which is used to count the number of bits set to one.
+
+## Program 5
+
+PL: Program o prototypie int multiply_by_ten(int num), który służy do mnożenie liczby podanej jako argument przez 10 (nie wykorzytuję tutaj rozkazów mul, imul czy lea).
+
+EN: A program with the prototype int multiply_by_ten(int num), which is used to multiply the number given as an argument by 10 (I don't use the commands like mul, imul or lea).
