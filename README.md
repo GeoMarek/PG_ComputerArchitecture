@@ -39,3 +39,15 @@ EN: A program with the prototype int multiply_by_ten(int num), which is used to 
 PL: Program int decimal count(int num) służy do zliczania sumy cyfr liczby podaneuj jako argument. 
 
 EN: The int decimal count(int num) program is used to count the sum of digits of a number given as an argument. 
+
+## Program 7
+
+PL: Program int binary_to_decimal(char* text) konwertuje ciąg znaków złozonych z zer i jedynek na liczbę. 
+
+EN: The int binary_to_decimal(char* text) program converts a string of characters composed of zeros and ones into numbers. 
+
+## Program 8
+
+PL: Program void copy_even_from_array(int* input, int* output, int size) kopiuje do tablicy wynikowej wszystkie parzyste elementy i wstawia je po kolei. Na pustych miejscach wstawia wartość -1. 
+
+EN: The void copy_even_from_array(int* input, int* output, int size) program copies all even items to the result array. In empty spaces, insert the value -1. 
