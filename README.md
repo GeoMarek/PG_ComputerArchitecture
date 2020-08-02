@@ -33,3 +33,9 @@ EN: A program with the prototype int count_set_bit(int num) which is used to cou
 PL: Program o prototypie int multiply_by_ten(int num), który służy do mnożenie liczby podanej jako argument przez 10 (nie wykorzytuję tutaj rozkazów mul, imul czy lea).
 
 EN: A program with the prototype int multiply_by_ten(int num), which is used to multiply the number given as an argument by 10 (I don't use the commands like mul, imul or lea).
+
+## Program 6
+
+PL: Program int decimal count(int num) służy do zliczania sumy cyfr liczby podaneuj jako argument. 
+
+EN: The int decimal count(int num) program is used to count the sum of digits of a number given as an argument. 
