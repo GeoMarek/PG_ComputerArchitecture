@@ -30,6 +30,7 @@
     <MASM Include="subprogram_6.asm" />
     <MASM Include="subprogram_7.asm" />
     <MASM Include="subprogram_8.asm" />
+    <MASM Include="subprogram_9.asm" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

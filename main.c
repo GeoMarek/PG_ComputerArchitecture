@@ -8,6 +8,7 @@ extern int multiply_by_ten(int num);
 extern int decimal_count(int num);
 extern int binary_to_decimal(char* binary);
 extern void copy_even_from_array(int* input, int* output, int size);
+extern int minus2_to_binary(unsigned int num);
 
 int main() {
 	/* subprogram 1 - approximate number pi */
@@ -74,12 +75,19 @@ int main() {
 	//printf("%s is %i in decimal", text, num);
 	
 	/* subprogram 8 - copy even elements from array */
-	int size = 5;
-	int input[] = { 1,3,52,71,97};
-	int* output = (int*)malloc(sizeof(int)*size);
-	copy_even_from_array(input, output, size);
-	for (int i = 0; i < size; ++i) {
-		printf("%i, ", output[i]);
-	}
+	//int size = 5;
+	//int input[] = { 1,3,52,71,97};
+	//int* output = (int*)malloc(sizeof(int)*size);
+	//copy_even_from_array(input, output, size);
+	//for (int i = 0; i < size; ++i) {
+	//	printf("%i, ", output[i]);
+	//}
+
+	/* subprogram 9 - minus binary to U2 */
+	// 25 = 11001 = (-2)^4 + (-2)^3 + (-2)^0 = 9
+	unsigned int minus_binary = 25;
+	int binary = minus2_to_binary(minus_binary);
+	printf("%i", binary);
+
 	return 0;
 }
