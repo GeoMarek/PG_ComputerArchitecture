@@ -9,8 +9,10 @@ extern int decimal_count(int num);
 extern int binary_to_decimal(char* binary);
 extern void copy_even_from_array(int* input, int* output, int size);
 extern int minus2_to_binary(unsigned int num);
+extern unsigned int compress(char* original, char* source);
 
 int main() {
+	
 	/* subprogram 1 - approximate number pi */
 	//
 	//printf("Enter number of elements\n\t");
@@ -34,7 +36,7 @@ int main() {
 	//ret = is_inside(2, 1, 3, 7, 11);
 	//printf("Result is: %i\n", ret);
 	
-	/* subprogram 3 - swap word in text */
+	/* subprogram 3 - join words */
 	/*int n;
 	int chars = 0;
 	printf("Enter number of words:");
@@ -84,10 +86,19 @@ int main() {
 	//}
 
 	/* subprogram 9 - minus binary to U2 */
-	// 25 = 11001 = (-2)^4 + (-2)^3 + (-2)^0 = 9
-	unsigned int minus_binary = 25;
-	int binary = minus2_to_binary(minus_binary);
-	printf("%i", binary);
+	//// 25 = 11001 = (-2)^4 + (-2)^3 + (-2)^0 = 9
+	//unsigned int minus_binary = 25;
+	//int binary = minus2_to_binary(minus_binary);
+	//printf("%i", binary);
+
+	/* subprogram 10 - compress ASCII array */
+	char input[] = "aaaaaxbbbcccccdddd";
+	char* output = malloc(80);
+	memset(output, 0, 80);
+	unsigned int result = compress(input, output);
+	printf("%i\n", result);
+	printf("%s", output);
+
 
 	return 0;
 }

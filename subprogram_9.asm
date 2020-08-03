@@ -44,7 +44,7 @@ main_loop:
 			jmp bit_not_set
 		add_value:
 			add EBX, EDI
-			mov ESI, EDX		rebuild ESI
+			mov ESI, EDX		; rebuild ESI
 			jmp bit_not_set
 
 	; increment exponent and check if its end 

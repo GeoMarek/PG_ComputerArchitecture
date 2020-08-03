@@ -60,5 +60,8 @@ EN: The int minus2_to_binary(unsigned int num) program converts a number written
 
 <a href="https://www.codecogs.com/eqnedit.php?latex=w=&space;\sum_{i=0}^{m-1}&space;x_{i}&space;\cdot&space;(-2)^{i}&space;\Rightarrow&space;00011001&space;=&space;1&space;\cdot&space;(-2)^4&space;&plus;&space;1&space;\cdot&space;(-2)^3&space;&plus;&space;1&space;\cdot&space;(-2)^0&space;=&space;9" target="_blank"><img src="https://latex.codecogs.com/gif.latex?w=&space;\sum_{i=0}^{m-1}&space;x_{i}&space;\cdot&space;(-2)^{i}&space;\Rightarrow&space;00011001&space;=&space;1&space;\cdot&space;(-2)^4&space;&plus;&space;1&space;\cdot&space;(-2)^3&space;&plus;&space;1&space;\cdot&space;(-2)^0&space;=&space;9" title="w= \sum_{i=0}^{m-1} x_{i} \cdot (-2)^{i} \Rightarrow 00011001 = 1 \cdot (-2)^4 + 1 \cdot (-2)^3 + 1 \cdot (-2)^0 = 9" /></a>
 
+## Program 10
 
+PL: Program unsigned int compress(char* original, char* source) dokonuje kompresji tekstu z podstawowym alfabetem . Każdy kolejny ciąg tych samych znaków zostanie zamieniony na parę znaków ASCII *znak, liczba*. Znaki nie powtarzające się sa kopiowane bez zmian, a program zwraca ilość znaków w buforze wyjsciowym. 
 
+EN: The program unsigned int compress(char* original, char* source) compresses text with the basic ASCII alphabet . Each successive sequence of the same characters will be converted into an pair char, count. Non-repeating characters are copied unchanged and the program returns the number of characters in the output buffer. 
