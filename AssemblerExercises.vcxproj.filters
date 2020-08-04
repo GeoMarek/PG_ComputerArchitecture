@@ -50,5 +50,11 @@
     <MASM Include="subprogram_10.asm">
       <Filter>Source Files</Filter>
     </MASM>
+    <MASM Include="subprogram_11.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
+    <MASM Include="subprogram_12.asm">
+      <Filter>Source Files</Filter>
+    </MASM>
   </ItemGroup>
 </Project>

@@ -10,6 +10,8 @@ extern int binary_to_decimal(char* binary);
 extern void copy_even_from_array(int* input, int* output, int size);
 extern int minus2_to_binary(unsigned int num);
 extern unsigned int compress(char* original, char* source);
+extern void encrypt(char* input, char* output, char key);
+extern float root_mean_square(float a, float b, float c);
 
 int main() {
 	
@@ -92,13 +94,28 @@ int main() {
 	//printf("%i", binary);
 
 	/* subprogram 10 - compress ASCII array */
-	char input[] = "aaaaaxbbbcccccdddd";
-	char* output = malloc(80);
-	memset(output, 0, 80);
-	unsigned int result = compress(input, output);
-	printf("%i\n", result);
-	printf("%s", output);
+	//char input[] = "aaaaaxbbbcccccdddd";
+	//char* output = malloc(80);
+	//memset(output, 0, 80);
+	//unsigned int result = compress(input, output);
+	//printf("%i\n", result);
+	//printf("%s", output);
 
+	/* subprogram 11 - encrypt text with key */
+	//char input[] = "ABCDEFGHIJKLMNOPQRSTUVWYXZ";
+	//char key = 'H';
+	//char* output = malloc(80); 
+	//memset(output, 0, 80);
+	//encrypt(input, output, key);
+	//printf("%s\n", input);
+	//printf("%s", output);
 
+	/* subprogram 11 - encrypt text with key */
+	float a = 0.0;
+	float b = 3.0;
+	float c = 4.0;
+	float rms = root_mean_square(a, b, c);
+	printf("%f", rms);
 	return 0;
+
 }

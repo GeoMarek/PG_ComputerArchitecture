@@ -65,3 +65,15 @@ EN: The int minus2_to_binary(unsigned int num) program converts a number written
 PL: Program unsigned int compress(char* original, char* source) dokonuje kompresji tekstu z podstawowym alfabetem . Każdy kolejny ciąg tych samych znaków zostanie zamieniony na parę znaków ASCII *znak, liczba*. Znaki nie powtarzające się sa kopiowane bez zmian, a program zwraca ilość znaków w buforze wyjsciowym. 
 
 EN: The program unsigned int compress(char* original, char* source) compresses text with the basic ASCII alphabet . Each successive sequence of the same characters will be converted into an pair char, count. Non-repeating characters are copied unchanged and the program returns the number of characters in the output buffer. 
+
+## Program 11
+
+PL: Program o prototypie void encrypt(char* input, char* output, char key) dokonuje szyfrowania tekstu wejściowego za pomocą klucza wg zasady *output=input+klucz*. Jeśli output ma kod większy niż znak 'Z' to wtedy odejmowane jest od niego 26, by wynikowy znak był literą alfabetu.
+
+EN: A program with a prototype void encrypt(char* input, char* output, char key) encrypts the input text with rule: output=input+key. If the output has a code larger than the 'Z' character, then 26 is subtracted from it so that the resulting character is an alphabetical letter.
+
+## Program 12
+
+PL: Program float root_mean_square(float a, float b, float c) służy od obliczania średniej kwadratowej z trzech liczb podanych jako argument. 
+
+EN: The float root_mean_square(float a, float b, float c) program is used to calculate the rms average of the three numbers given as an argument. 

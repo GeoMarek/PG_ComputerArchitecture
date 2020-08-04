@@ -24,6 +24,8 @@
   <ItemGroup>
     <MASM Include="subprogram_1.asm" />
     <MASM Include="subprogram_10.asm" />
+    <MASM Include="subprogram_11.asm" />
+    <MASM Include="subprogram_12.asm" />
     <MASM Include="subprogram_2.asm" />
     <MASM Include="subprogram_3.asm" />
     <MASM Include="subprogram_4.asm" />
