@@ -3,6 +3,7 @@
 
 extern void encrypt(char* input, char* output, char key);
 extern float root_mean_square(float a, float b, float c);
+extern float float_by_float(float a, float b);
 
 void test_11()
 {
@@ -23,12 +24,22 @@ void test_12()
 	float b = 3.0;
 	float c = 4.0;
 	float rms = root_mean_square(a, b, c);
-	printf("\n%f", rms);
+	printf("\nRMS from %f, %f, %f = %f", a,b,c, rms);
+}
+
+void test_13() 
+{
+	/* float by float without fpu */
+	float a = -7.0f;
+	float b = 2.0f;
+	float result = float_by_float(a, b);
+	printf("\n%f * %f is equal %f", a,b, result);
 }
 
 void presentation_2()
 {
 	int count = 10;
-	printf("\nRuning test number: %i\n", ++count); test_11(); test_11();
-	printf("\nRuning test number: %i\n", ++count); test_12(); test_12();
+	printf("\nRuning test number: %i\n", ++count); test_11(); 
+	printf("\nRuning test number: %i\n", ++count); test_12(); 
+	printf("\nRuning test number: %i\n", ++count); test_13();
 }

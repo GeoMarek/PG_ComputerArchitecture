@@ -77,3 +77,9 @@ EN: A program with a prototype void encrypt(char* input, char* output, char key)
 PL: Program float root_mean_square(float a, float b, float c) służy od obliczania średniej kwadratowej z trzech liczb podanych jako argument. 
 
 EN: The float root_mean_square(float a, float b, float c) program is used to calculate the rms average of the three numbers given as an argument. 
+
+## Program 13
+
+PL: Pogram float float_by_float(float a, float b) zwraca wynik przemnożenia przez siebie argumentów. W funkcji nie skorzystano z instrukcji koprocesora.
+
+EN: The float_by_float(float a, float b) programme returns the result of its argument multiplication. The function does not use a coprocessor instruction.
