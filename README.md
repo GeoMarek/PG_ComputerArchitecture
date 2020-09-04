@@ -19,6 +19,12 @@ Bunch of exercises in assembly 32bit. I'am using masm compiler and Visual Studio
 15. [Copy even from array](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/copy_even_from_array)
 16. [XOR without XOR](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/without_xor)
 17. [U2 to ZN conversion](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/u2_to_sign_modul)
-18. [Shift 96bit number to left](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/shift_left_96_bit)
+18. [Shift 96bit number to left](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/shift_left_96bit)
 19. [Alloc and copy array](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/copy_array)
+20. [Text in MessageBox](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/message_box)
+21. [Find min in array](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/min_array)
+22. [Random encrypt](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/random_encrypt)
+23.
+24.
+25.
 
