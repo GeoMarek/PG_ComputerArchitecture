@@ -24,7 +24,7 @@ Bunch of exercises in assembly 32bit. I'am using masm compiler and Visual Studio
 20. [Text in MessageBox](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/message_box)
 21. [Find min in array](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/min_array)
 22. [Random encrypt](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/random_encrypt)
-23.
-24.
+23. [Factorial](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/factorial)
+24. [Recursive Square](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/recursive_square)
 25.
 
