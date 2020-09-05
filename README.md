@@ -26,5 +26,6 @@ Bunch of exercises in assembly 32bit. I'am using masm compiler and Visual Studio
 22. [Random encrypt](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/random_encrypt)
 23. [Factorial](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/factorial)
 24. [Recursive Square](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/recursive_square)
-25.
+25. [Round mixed number](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/round_mixed_number)
+26. [Compare mixed formats](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/compare_mixed_formats)
 
