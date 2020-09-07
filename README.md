@@ -28,4 +28,5 @@ Bunch of exercises in assembly 32bit. I'am using masm compiler and Visual Studio
 24. [Recursive Square](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/recursive_square)
 25. [Round mixed number](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/round_mixed_number)
 26. [Compare mixed formats](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/compare_mixed_formats)
+27. [Float to Double](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/float_to_double)
 
