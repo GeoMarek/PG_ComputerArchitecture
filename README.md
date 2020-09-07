@@ -29,4 +29,6 @@ Bunch of exercises in assembly 32bit. I'am using masm compiler and Visual Studio
 25. [Round mixed number](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/round_mixed_number)
 26. [Compare mixed formats](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/compare_mixed_formats)
 27. [Float to Double](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/float_to_double)
-
+28. [Area of a circle](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/circle_area)
+29. [Increment Double](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/increment_double)
+29.
