@@ -34,3 +34,4 @@ Bunch of exercises in assembly 32bit. I'am using masm compiler and Visual Studio
 30. [Weighted average](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/weighted_average)
 31. [Largest Common Divisor](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/largest_common_divisor)
 32. [STD Call Functions](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/std_call)
+33. [Display integer](https://github.com/GeoMarek/AssemblerExercises/tree/master/assembly/display_int)
