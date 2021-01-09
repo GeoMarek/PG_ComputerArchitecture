@@ -2,7 +2,6 @@
 
 extern float srednia_kwadratowa(float* tab, int n);
 extern float weighted_average(int n, float* scores, float* scales);
-extern float number_pi(int n);
 
 int main()
 {
@@ -17,11 +16,6 @@ int main()
 	float scores[3] = { 5.0f, 3.0f, 6.0f };
 	float result = weighted_average(x, scores, scales);
 	printf("Wynik to %f\n", result);
-
-	/* zadanie trzecie */
-	int iter = 10;
-	float pi = number_pi(iter);
-	printf("Liczba Pi wynosi %f\n", pi);
 
 	return 0;
 }
