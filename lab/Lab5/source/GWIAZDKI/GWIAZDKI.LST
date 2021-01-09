@@ -1,0 +1,160 @@
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 20:36:40
+                                                             Page     1-1
+
+
+       1				.386 
+       2 0000				rozkazy SEGMENT use16 
+       3						ASSUME CS:rozkazy 
+       4						 
+       5 0000				obsluga_zegara PROC 
+       6 0000  50				push AX 
+       7 0001  53				push BX  
+       8 0002  06				push ES 
+       9					 
+      10 0003  B8 B800				mov AX, 0B800h		
+									; orygi
+					nalny adres ma B8000h 
+      11 0006  8E C0				mov ES, AX		
+									
+						; ale wpisujemy B800h, bo ES 
+      12								
+									
+							; jest zawsze mnozony p
+					rzez 16 
+      13					 
+      14 0008  2E: 8B 1E 0031 R			mov BX, CS:licznik	
+									; liczn
+					ik to adres biezacy 
+      15								
+									
+							; pamieci ekranu 
+      16					 
+      17 000D  26: C6 07 2A			mov byte ptr ES:[BX], '*'
+								; kod ascii 
+      18 0011  26: C6 47 01 07			mov byte ptr ES:[BX+1], 0000011
+					1b	; kolor 
+      19 0016  83 C3 02				add BX, 2		
+									
+						; nastepny znak 
+      20					 
+      21 0019  81 FB 0FA0			cmp BX, 4000		
+									; spraw
+					dzenie czy koniec 
+      22 001D  0F 82 0024 R			jb wyswietlaj_dalej	
+									 
+      23 0021  BB 0000				mov BX, 0 
+      24					 
+      25 0024					wyswietlaj_dalej: 
+      26 0024  2E: 89 1E 0031 R				mov CS:licznik, BX
+									; nadpi
+					sanie licznik nowym adresem 
+      27					 
+      28 0029  07				pop ES 
+      29 002A  5B				pop BX 
+      30 002B  58				pop AX 
+      31					 
+      32 002C  2E: FF 2E 0033 R			jmp dword ptr cs:wektor8 
+      33 0031  0140				licznik 	dw 320 
+      34 0033  ????????				wektor8 	dd ? 
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 20:36:40
+                                                             Page     1-2
+
+
+      35					 
+      36 0037				obsluga_zegara ENDP 
+      37				 
+      38				 
+      39 0037				zacznij: 
+      40 0037  B0 00				mov AL, 0 
+      41 0039  B4 05				mov AH, 5 
+      42 003B  CD 0A				int 10 
+      43 003D  B8 0000				mov AX, 0 
+      44 0040  8E D8				mov DS, AX 
+      45					 
+      46 0042  66| A1 0020			mov EAX, DS:[32] 
+      47 0046  2E: 66| A3 0033 R		mov CS:wektor8, EAX 
+      48					 
+      49 004B  B8 ---- R			mov AX, SEG obsluga_zegara 
+      50 004E  BB 0000 R			mov BX, OFFSET obsluga_zegara 
+      51 0051  FA				cli 
+      52					 
+      53 0052  89 1E 0020			mov DS:[32], BX 
+      54 0056  A3 0022				mov DS:[34], AX 
+      55 0059  FB				sti 
+      56					 
+      57					; sprawdzenie czy wcisnieto kla
+					wisz 
+      58					; int 16h - ustawia ZF po wcisn
+					ieciu  
+      59 005A					aktywne_oczekiwanie: 
+      60 005A  B4 01					mov AH, 1 
+      61 005C  CD 16					int 16h 
+      62 005E  74 FA				jz aktywne_oczekiwanie 
+      63					 
+      64					; sprawdzenie czy wcisnieto 'x'
+					 
+      65 0060  B4 00				mov AH, 0 
+      66 0062  CD 16				int 16h 
+      67 0064  3C 78				cmp AL, 'x' 
+      68 0066  75 F2				jne aktywne_oczekiwanie 
+      69					 
+      70 0068  2E: 66| A1 0033 R		mov EAX, CS:wektor8 
+      71 006D  FA				cli 
+      72 006E  66| A3 0020			mov DS:[32], EAX 
+      73 0072  FB				STI 
+      74					 
+      75 0073  B0 00				mov AL, 0 
+      76 0075  B4 4C				mov AH, 4Ch 
+      77 0077  CD 21				int 21h 
+      78				 
+      79 0079				rozkazy ENDS 
+      80					 
+      81 0000				stosik SEGMENT stack 
+      82 0000  0100[				db 256 dup (?) 
+      83	    ??			
+      84			 ]	
+      85				
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 20:36:40
+                                                             Page     1-3
+
+
+      86 0100				stosik ENDS 
+      87				 
+      88				END zacznij 
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 20:36:40
+                                                             Symbols-1
+
+
+
+
+                N a m e         	Size	Length	 Align	Combine Class
+
+ROZKAZY  . . . . . . . . . . . .  	16 Bit	0079	PARA	NONE	
+STOSIK . . . . . . . . . . . . .  	32 Bit	0100	PARA	STACK	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+AKTYWNE_OCZEKIWANIE  . . . . . .  	L NEAR	005A	ROZKAZY
+
+LICZNIK  . . . . . . . . . . . .  	L WORD	0031	ROZKAZY
+
+OBSLUGA_ZEGARA . . . . . . . . .  	N PROC	0000	ROZKAZY	Length = 0037
+
+WEKTOR8  . . . . . . . . . . . .  	L DWORD	0033	ROZKAZY
+WYSWIETLAJ_DALEJ . . . . . . . .  	L NEAR	0024	ROZKAZY
+
+ZACZNIJ  . . . . . . . . . . . .  	L NEAR	0037	ROZKAZY
+
+@FILENAME  . . . . . . . . . . .  	TEXT  GWIAZDKI		
+
+
+     85 Source  Lines
+     85 Total   Lines
+     10 Symbols
+
+  50376 + 466168 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

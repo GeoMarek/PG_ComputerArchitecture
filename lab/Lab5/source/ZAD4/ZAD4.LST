@@ -1,0 +1,250 @@
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 22:19:29
+                                                             Page     1-1
+
+
+       1				; Program gwiazdki.asm 
+       2				; Wyświetlanie znaków * w takt przerw
+					ań zegarowych 
+       3				; Uruchomienie w trybie rzeczywistym pr
+					ocesora x86 
+       4				; lub na maszynie wirtualnej 
+       5				; zakończenie programu po naciśnięci
+					u klawisza 'x' 
+       6				; asemblacja (MASM 4.0): masm gwiazdki.
+					asm,,,; 
+       7				; konsolidacja (LINK 3.60): link gwiazd
+					ki.obj; 
+       8				.386 
+       9 0000				rozkazy SEGMENT use16 
+      10				 ASSUME CS:rozkazy  
+      11				 
+      12 0000				wyswietl_AL PROC 
+      13				; wyswietl AL na ekranie wg adresu ES:B
+					X 
+      14 0000  50			 push ax 
+      15 0001  51			 push cx 
+      16 0002  52			 push dx 
+      17				   
+      18				   
+      19 0003  B1 0A			 mov cl, 10 	; dzielnik 
+      20				; dzielenie AX przez CL, wynik w AL, re
+					szta w AH 
+      21				; setki (bx) dziesiatki(bx+2) jednosci(
+					bx+4) 
+      22 0005  B4 00			 mov ah, 0 			; zerow
+					anie reszty przed dzieleniem 
+      23 0007  F6 F1			 div cl 			; pierw
+					sze dzielenie 
+      24 0009  80 C4 30			 add ah, 30H 		; zamiana reszt
+					y na ASCII 
+      25 000C  26: 88 67 04		 mov es:[bx+4], ah 	; wpisanie cyfr
+					y jedności 
+      26 0010  B4 00			 mov ah, 0			; zerow
+					anie reszty przed dzieleniem 
+      27 0012  F6 F1			 div cl 			; drugi
+					e dzielenie 
+      28 0014  80 C4 30			 add ah, 30H 		; zamiana reszt
+					y na kod ASCII 
+      29 0017  26: 88 67 02		 mov es:[bx+2], ah 	; wpisanie cyfr
+					y dziesiątek 
+      30 001B  04 30			 add al, 30H 		; zamiana ilora
+					zu na kod ASCII 
+      31 001D  26: 88 07		 mov es:[bx+0], al 	; cyfra setek 
+      32				  
+      33				; wpisanie kolorów dla całej liczby 
+      34 0020  B0 0F			 mov al, 00001111B 
+      35 0022  26: 88 47 01		 mov es:[bx+1],al ; dla setek 
+      36 0026  26: 88 47 03		 mov es:[bx+3],al ; dla dziesiatek 
+      37 002A  26: 88 47 05		 mov es:[bx+5],al ; dla jednosci 
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 22:19:29
+                                                             Page     1-2
+
+
+      38				 
+      39				; wyjscie z podprogramu 
+      40 002E  5A			 pop dx 
+      41 002F  59			 pop cx 
+      42 0030  58			 pop ax 
+      43 0031  C3			 ret 
+      44 0032				wyswietl_AL ENDP 
+      45				 
+      46				 
+      47				 
+      48				; procedura obsługi przerwania klawiat
+					ury 
+      49 0032				obsluga_klaw PROC 
+      50 0032  50			 push ax 
+      51 0033  53			 push bx 
+      52 0034  06			 push es 
+      53				; deklaracja zmiennych 
+      54 0035  B8 B800			 mov ax, 0B800h 		; adres
+					 trybu tekstowego -> B8000h, ale po pom
+					nozeniu przez 16 
+      55 0038  8E C0			 mov es, ax			
+						; wpisujemy adres do rejestru E
+					S 
+      56 003A  2E: 8B 1E 005F R		 mov bx, cs:licznik		; adres
+					 biezacej komorki w trybie tekstowym 
+      57				; wywołanie obslugi klawiatury 
+      58 003F  E4 60			 in al, 60h			
+						; przeslanie do AL numeru klawi
+					sza 
+      59 0041  E8 0000 R		 call wyswietl_AL		; wywo�
+					�anie AL 
+      60				; zapis znaku w pamieci ekranu 
+      61 0044  83 C3 08			 add bx,8 			
+						; przechodzimy dalej, zeby ladn
+					ie bylo widac 
+      62 0047  81 FB 0FA0		 cmp bx,4000 			; spraw
+					dzamy, czy jestesmy w pamieci trybu  
+      63 004B  0F 82 0052 R		 jb wyswietl			; skok 
+					gdy nie koniec ekranu 
+      64 004F  BB 0000			 mov bx, 0 			
+						; wyzerowanie licznik, jak cał
+					y ekran zapisany 
+      65				; zakonczenie  
+      66 0052				wyswietl: 
+      67 0052  2E: 89 1E 005F R		 mov cs:licznik,bx ; adres biezacy do l
+					icznika 
+      68 0057  07			 pop es 
+      69 0058  5B			 pop bx 
+      70 0059  58			 pop ax 
+      71 005A  2E: FF 2E 0061 R		 jmp dword PTR cs:wektor9 ; skok do org
+					 przerwania klawiatury 
+      72				 
+      73 005F  0140			licznik dw 320 
+      74 0061  ????????			wektor9 dd ? 
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 22:19:29
+                                                             Page     1-3
+
+
+      75 0065				obsluga_klaw ENDP 
+      76				 
+      77				 
+      78				;======================================
+					==================================== 
+      79				; program główny - instalacja i deins
+					talacja procedury 
+      80				; obsługi przerwań 
+      81				; ustalenie strony nr 0 dla trybu tekst
+					owego 
+      82 0065				zacznij: 
+      83 0065  B8 0000			 mov ax, 0 
+      84 0068  8E D8			 mov ds,ax ; zerowanie rejestru DS 
+      85				  
+      86				  
+      87				; ZAPISANIE ORYGINALEJ FUNKCJI PRZERWAN
+					IA 
+      88				; wektor nr 9 ma 4 bajty i lezy od adre
+					su fizycznegi 0*16 + 4*9 = 36 
+      89 006A  66| A1 0024		 mov eax,ds:[36] ; adres fizyczny 0*16 
+					+ 4*9 = 36 
+      90 006E  2E: 66| A3 0061 R	 mov cs:wektor9, eax 
+      91				 
+      92				; WRZUCENIE DO TWP NASZEJ PROCEDURY 
+      93 0073  B8 ---- R		 mov ax, SEG obsluga_klaw 	
+						; część segmentowa adresu 
+      94 0076  BB 0032 R		 mov bx, OFFSET obsluga_klaw 	; offse
+					t adresu 
+      95 0079  FA			 cli 				
+								; zablokowanie 
+					przerwań 
+      96 007A  89 1E 0024		 mov ds:[36], bx 		
+							; zapisanie w TWP segme
+					ntu 
+      97 007E  A3 0026			 mov ds:[38], ax 		
+							; zapisanie w TWP offse
+					tu 
+      98 0081  FB			 sti 				
+								; odblokowanie 
+					przerwań 
+      99				 
+     100				 ; OCZEKIWANIE NA WCISNIECIE KLAWISZA E
+					SC 
+     101 0082				aktywne_oczekiwanie: 
+     102 0082  B4 01			 mov ah,1 
+     103 0084  CD 16			 int 16H	 		
+							; funkcja INT 16H (AH=1
+					) ustawia ZF=1 jeśli naciśnięto klaw
+					isz 
+     104 0086  74 FA			 jz aktywne_oczekiwanie 
+     105 0088  B4 00			 mov ah, 0 
+     106 008A  CD 16			 int 16H			
+							; funkcja INT 16H (AH=0
+					) zapisuje znak w AL 
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 22:19:29
+                                                             Page     1-4
+
+
+     107 008C  3C 1B			 cmp al, 27			
+						; porównanie z kodem ESC 
+     108 008E  75 F2			 jne aktywne_oczekiwanie 	; skok,
+					 gdy znak rozny od x 
+     109				  
+     110				; ODTWORZENIE STAREGO WEKTORA PRZERWAŃ
+					 
+     111 0090  2E: 66| A1 0061 R	 mov eax, cs:wektor9 		; adres
+					 oryginalnego wektora nr8 do eax 
+     112 0095  FA			 cli				
+							; zablokowanie przerwa�
+					� 
+     113 0096  66| A3 0024		 mov ds:[36], eax 		
+						; przesłanie wartości orygina
+					lnej 
+     114 009A  FB			 sti				
+						 	; odblokowanie przerwa�
+					� 
+     115				  
+     116				; ZAKONCZENIE PROGRAMU 
+     117 009B  B0 00			 mov al, 0 
+     118 009D  B4 4C			 mov ah, 4CH 
+     119 009F  CD 21			 int 21H 
+     120 00A1				rozkazy ENDS 
+     121				;======================================
+					==================================== 
+     122				 
+     123 0000				nasz_stos SEGMENT stack 
+     124 0000  0080[			 db 128 dup (?) 
+     125	    ??			
+     126			 ]	
+     127				
+     128 0080				nasz_stos ENDS 
+     129				END zacznij 
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 22:19:29
+                                                             Symbols-1
+
+
+
+
+                N a m e         	Size	Length	 Align	Combine Class
+
+NASZ_STOS  . . . . . . . . . . .  	32 Bit	0080	PARA	STACK	
+ROZKAZY  . . . . . . . . . . . .  	16 Bit	00A1	PARA	NONE	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+AKTYWNE_OCZEKIWANIE  . . . . . .  	L NEAR	0082	ROZKAZY
+
+LICZNIK  . . . . . . . . . . . .  	L WORD	005F	ROZKAZY
+
+OBSLUGA_KLAW . . . . . . . . . .  	N PROC	0032	ROZKAZY	Length = 0033
+
+WEKTOR9  . . . . . . . . . . . .  	L DWORD	0061	ROZKAZY
+WYSWIETL . . . . . . . . . . . .  	L NEAR	0052	ROZKAZY
+WYSWIETL_AL  . . . . . . . . . .  	N PROC	0000	ROZKAZY	Length = 0032
+
+ZACZNIJ  . . . . . . . . . . . .  	L NEAR	0065	ROZKAZY
+
+@FILENAME  . . . . . . . . . . .  	TEXT  ZAD4		
+
+
+    126 Source  Lines
+    126 Total   Lines
+     11 Symbols
+
+  50484 + 466060 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors

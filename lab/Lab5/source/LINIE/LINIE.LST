@@ -1,0 +1,144 @@
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 22:37:00
+                                                             Page     1-1
+
+
+       1				.386 
+       2 0000				rozkazy SEGMENT use16 
+       3					ASSUME cs:rozkazy 
+       4				 
+       5 0000				linia PROC 
+       6 0000  50				push AX 
+       7 0001  53				push BX 
+       8 0002  06				push ES 
+       9					 
+      10 0003  B8 A000				mov AX, 0A000H  
+      11 0006  8E C0				mov ES, AX 
+      12					 
+      13					; wypisanie piksela na ekranie 
+      14 0008  2E: 8B 1E 0041 R			mov BX, cs:adres_piksela  
+      15 000D  2E: A0 0040 R			mov AL, cs:kolor 
+      16 0011  26: 88 07			mov es:[BX], AL  
+      17				 
+      18					; inkrementacja i sprawdzenie c
+					zy koniec 
+      19 0014  81 C3 0140			add BX, 320 
+      20 0018  81 FB FA00			cmp BX, 320*200 
+      21 001C  0F 82 0033 R			jb kolumna_bez_zmian  
+      22					 
+      23					; zmiana koloru i kolumny 
+      24 0020  2E: 83 06 0043 R 0A		add word PTR cs:przyrost, 10 
+      25 0026  BB 000A				mov BX, 10 
+      26 0029  2E: 03 1E 0043 R			add BX, cs:przyrost 
+      27 002E  2E: FE 06 0040 R			inc cs:kolor  
+      28				 
+      29				 
+      30 0033					kolumna_bez_zmian: 
+      31 0033  2E: 89 1E 0041 R			mov cs:adres_piksela, BX 
+      32					 
+      33					; skok do oryginalnego przerwan
+					ia 
+      34 0038  07				pop ES 
+      35 0039  5B				pop BX 
+      36 003A  58				pop AX 
+      37 003B  2E: FF 2E 0045 R			jmp dword PTR cs:wektor8 
+      38					 
+      39					; zmienne podprogramu 
+      40 0040  01				kolor db 1  
+      41 0041  000A				adres_piksela dw 10  
+      42 0043  0000				przyrost dw 0 
+      43 0045  ????????				wektor8 dd ? 
+      44 0049				linia ENDP 
+      45				 
+      46 0049				zacznij: 
+      47 0049  B4 00				mov AH, 0 
+      48 004B  B0 13				mov AL, 13H  
+      49 004D  CD 10				int 10H 
+      50					 
+      51 004F  BB 0000				mov BX, 0 
+      52 0052  8E C3				mov ES, BX  
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 22:37:00
+                                                             Page     1-2
+
+
+      53					 
+      54					; nadpisanie procedury przerwan
+					ia 
+      55 0054  26: 66| A1 0020			mov EAX, es:[32]  
+      56 0059  2E: 66| A3 0045 R		mov cs:wektor8, EAX 
+      57 005E  B8 ---- R			mov AX, SEG linia 
+      58 0061  BB 0000 R			mov BX, OFFSET linia 
+      59 0064  FA				cli  
+      60 0065  26: 89 1E 0020			mov es:[32], BX 
+      61 006A  26: A3 0022			mov es:[32+2], AX 
+      62 006E  FB				sti 
+      63					 
+      64					; czekaj na jakikolwiek znak 
+      65 006F					czekaj: 
+      66 006F  B4 01					mov ah, 1  
+      67 0071  CD 16					int 16h  
+      68 0073  74 FA					jz czekaj 
+      69 0075  B4 00				mov ah, 0  
+      70 0077  B0 03				mov al, 3H 
+      71 0079  CD 10				int 10H 
+      72					 
+      73					; odtworzenie oryginalnej zawar
+					tości wektora nr 8 
+      74 007B  2E: 66| A1 0045 R		mov EAX, cs:wektor8 
+      75 0080  26: 66| A3 0020			mov es:[32], EAX 
+      76					 
+      77					; zakończenie wykonywania prog
+					ramu 
+      78 0085  B8 4C00				mov AX, 4C00H 
+      79 0088  CD 21				int 21H 
+      80				 
+      81 008A				rozkazy ENDS 
+      82				 
+      83 0000				stosik SEGMENT stack 
+      84 0000  0100[			db 256 dup (?) 
+      85	    ??			
+      86			 ]	
+      87				
+      88 0100				stosik ENDS 
+      89					 
+      90				END zacznij 
+Microsoft (R) Macro Assembler Version 5.00                  1/9/21 22:37:00
+                                                             Symbols-1
+
+
+
+
+                N a m e         	Size	Length	 Align	Combine Class
+
+ROZKAZY  . . . . . . . . . . . .  	16 Bit	008A	PARA	NONE	
+STOSIK . . . . . . . . . . . . .  	32 Bit	0100	PARA	STACK	
+
+Symbols:            
+
+                N a m e         	Type	 Value	 Attr
+
+ADRES_PIKSELA  . . . . . . . . .  	L WORD	0041	ROZKAZY
+
+CZEKAJ . . . . . . . . . . . . .  	L NEAR	006F	ROZKAZY
+
+KOLOR  . . . . . . . . . . . . .  	L BYTE	0040	ROZKAZY
+KOLUMNA_BEZ_ZMIAN  . . . . . . .  	L NEAR	0033	ROZKAZY
+
+LINIA  . . . . . . . . . . . . .  	N PROC	0000	ROZKAZY	Length = 0049
+
+PRZYROST . . . . . . . . . . . .  	L WORD	0043	ROZKAZY
+
+WEKTOR8  . . . . . . . . . . . .  	L DWORD	0045	ROZKAZY
+
+ZACZNIJ  . . . . . . . . . . . .  	L NEAR	0049	ROZKAZY
+
+@FILENAME  . . . . . . . . . . .  	TEXT  linie		
+
+
+     87 Source  Lines
+     87 Total   Lines
+     12 Symbols
+
+  50484 + 466060 Bytes symbol space free
+
+      0 Warning Errors
+      0 Severe  Errors
