@@ -1,0 +1,78 @@
+.686
+.model flat
+extern _malloc : PROC
+public _XYZ2R
+
+.data
+trzycos real4 3.063
+jedencos real4 1.393
+zerocos real4 0.476
+
+.code
+_XYZ2R PROC ; float* XYZ2R(float * tab, int n);
+	push ebp
+	mov ebp, esp
+	push esi
+	push edi
+	finit
+
+	mov esi, [ebp + 8] ; dane
+	mov ecx, [ebp + 12]
+	push ecx
+	call _malloc
+	add esp, 4
+	mov edi, eax ; obszar na wynik
+
+	mov ecx, 0 ; licznik esi
+	mov edx, 0 ; licznik edi
+ptl:
+	fld trzycos
+	fld dword ptr [esi + 4 * ecx + 0]
+	fmul
+	fld jedencos
+	fld dword ptr [esi + 4 * ecx + 4]
+	fmul
+	fld zerocos
+	fld dword ptr [esi + 4 * ecx + 8]
+	fmul ; z | y | x
+	fadd ; y+z | x
+	fsub ; x - y - z
+	
+	fst dword ptr [edi + 4 * edx]
+	
+	add ecx, 3
+	inc edx
+	cmp edx, [ebp + 12]
+	jne ptl
+
+	mov eax, edi ; wsk na tablice wynikow
+
+	pop edi
+	pop esi
+	pop ebp
+	ret
+_XYZ2R ENDP
+
+END
+
+;========
+
+
+#include <iostream>
+using namespace std;
+extern "C" float* XYZ2R(float * tab, int n);
+
+
+int main()
+{	
+	int n = 2;
+	float tab[] = { 12.12, 1.14, 21.21, 53.315,135.135,31.13 };
+	auto wsk = XYZ2R(tab, n);
+
+	cout << "C           ASM\n";
+	for (int i = 0; i < n; i++)
+	{
+		cout << 3.063 * tab[3 * i] - 1.393 * tab[3 * i + 1] - 0.476 * tab[3 * i + 2] << "    " << wsk[i] << endl;
+	}
+
+	return 0;}

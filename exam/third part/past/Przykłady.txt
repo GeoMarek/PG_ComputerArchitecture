@@ -1,0 +1,69 @@
+; W tych zadaniach macie jedynie zakodować te instrukcje na binarne.
+; NIE ZASTANAWIAJCIE SIĘ CO ONE ROBIĄ, to są w większości "śmieci".
+
+; ZESTAW 1
+ptl: mov cx, dx
+     in al, 73H
+     sub ebx, 1
+     loop ptl
+     add edx, 3
+
+; ZESTAW 2
+     jc cos
+ptl: mov [ebx+ecx], dl
+     and si, bx
+     loop ptl
+cos:
+
+; ZESTAW 3
+ptl: mov al, bh
+     out 70H, al
+     in al, 64h
+     sub bh, [esi][edi]
+     inc ebx
+     loop ptl
+
+; ZESTAW 4
+ppp: rol eax, 4        ; C1 C0 04
+     and eax, 0Fh      ; 83 E0 0F
+     inc edx           ; 42
+     mov [ebx+edx], al ; 88 04 1A
+     loop ppp          ; E2 F4
+
+; ZESTAW 5
+ptl: add eax, 4
+     neg eax
+     mov [esi], eax
+     add esi, 4
+     loop ptl
+
+; ZESTAW 6
+ppp: shr bx, 3
+     mov [edx + ebx], dl
+     push edx
+     cmp edx, 12
+     je ppp
+
+; ZESTAW 7
+ptl: mov cx, dx ; 66 8B CA
+     sub ebx, 1 ; 83 EB 01
+     loop ptl   ; E2 F8
+     add edx, 3 ; 83 C2 03
+
+; ZESTAW 8
+ptl: mov al, bh         ; 8A C7
+     sub bh, [esi][edi] ; 2A 3C 37
+     inc ebx            ; 43
+     loop ptl           ; E2 F8
+
+; ZESTAW 9
+ptl: add eax, 4    ; 83 C0 04
+     mov [esi],eax ; 89 06
+     add esi, 4    ; 83 C6 04
+     loop ptl      ; E2 F6
+
+; ZESTAW 10
+ppp: mov [edx+ebx], dl ; 88 14 13
+     push edx          ; 52
+     cmp edx, 12       ; 83 FA 0C
+     je ppp            ; 74 F7

@@ -1,0 +1,68 @@
+.686
+.model flat
+extern _malloc : PROC
+public _XYZ2R
+
+.code
+_XYZ2R PROC ; float* XYZ2R(float * tab, int n);
+	push ebp
+	mov ebp, esp
+	push esi
+	push edi
+	finit
+
+	mov esi, [ebp + 8] ; dane
+	mov ecx, [ebp + 12]
+	push ecx
+	call _malloc
+	add esp, 4
+	mov edi, eax ; obszar na wynik
+
+	mov ecx, 0 ; licznik esi
+	mov edx, 0 ; licznik edi
+ptl:
+	push dword ptr 3063
+	fild dword ptr [esp]
+	push dword ptr 1000
+	fild dword ptr [esp] ; 1000 | 3063
+	fdiv ; 3.063
+	fld dword ptr [esi + 4 * ecx + 0]
+	fmul
+
+	push dword ptr 1393
+	fild dword ptr [esp]
+	push dword ptr 1000
+	fild dword ptr [esp]
+	fdiv
+	fld dword ptr [esi + 4 * ecx + 4]
+	fmul
+
+	push dword ptr 476
+	fild dword ptr [esp]
+	push dword ptr 1000
+	fild dword ptr [esp]
+	fdiv
+	fld dword ptr [esi + 4 * ecx + 8]
+
+	fmul ; z | y | x
+	fadd ; y + z | x
+	fsub ; x - y - z
+	
+	fst dword ptr [edi + 4 * edx]
+	fstp st(0)
+	
+	add esp, 24
+	add ecx, 3
+	inc edx
+	cmp edx, [ebp + 12]
+	jne ptl
+
+	mov eax, edi ; wsk na tablice wynikow
+
+	pop edi
+	pop esi
+	pop ebp
+	ret
+_XYZ2R ENDP
+
+END

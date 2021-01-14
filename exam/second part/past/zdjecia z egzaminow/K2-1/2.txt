@@ -1,0 +1,68 @@
+.686
+.model flat
+.xmm
+public _sortowanie
+
+.code
+_sortowanie PROC ; unsigned __int64 sortowanie(unsigned __int64 * tabl, unsigned int n);
+	push ebp
+	mov ebp, esp
+	push esi
+	push ebx
+	finit
+	
+	mov esi, [ebp + 8] ; tablica
+	mov ecx, 0 ; iterator po ptl1
+	mov edx, 1 ; iterator po ptl2
+
+ptl1:
+ptl2:
+	mov eax, [esi + 8 * ecx]
+	mov ebx, [esi + 8 * edx]
+	cmp eax, ebx ; cmp tab[i], tab[j]
+	jbe dalej
+	mov [esi + 8 * ecx], ebx
+	mov [esi + 8 * edx], eax
+dalej:
+	inc edx
+	cmp edx, ecx ; cmp j, i
+	jb ptl2
+	mov edx, 0
+	inc ecx
+	cmp ecx, [ebp + 12] ; cmp i, n
+	jb ptl1
+
+	mov ecx, [ebp + 12]
+	dec ecx
+	mov eax, [esi + 8 * ecx] ; ostatni, najmniejszy element
+
+	pop ebx
+	pop esi
+	pop ebp
+	ret
+_sortowanie ENDP
+
+END
+
+; for(int i = 0; i < n; i++)
+;	for(int j = 0; j < i; j++)
+;		if(tab[i]>tab[j])
+;			swap
+
+
+
+;===================
+#include <iostream>
+#include <bitset>
+using namespace std;
+extern "C" unsigned __int64 sortowanie(unsigned __int64 * tabl, unsigned int n);
+
+int main()
+{	
+	unsigned __int64 longi[] = { 1234,213,125,15,6666 };
+	cout << sortowanie(longi, 5) << endl;
+
+	for (int i = 0; i < 5; i++)
+		cout << longi[i] << ", ";
+
+	return 0;}

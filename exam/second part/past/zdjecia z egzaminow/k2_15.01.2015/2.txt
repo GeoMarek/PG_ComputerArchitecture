@@ -1,0 +1,65 @@
+.686
+.model flat
+public _sortowanie
+
+.code
+_sortowanie PROC ; unsigned __int64 sortowanie(unsigned __int64 * tabl, unsigned int n);
+	push ebp
+	mov ebp, esp
+	push esi
+
+	mov esi, [ebp + 8] ; wskaünik na tablice
+	mov ecx, 0 ; iterator po petli1
+	mov edx, 0 ; iterator po petli2
+
+petla1:
+petla2:
+	mov eax, [esi + 8 * ecx]
+	mov ebx, [esi + 8 * edx]
+	cmp eax, ebx
+	jae dalej2
+	mov [esi + 8 * ecx], ebx
+	mov [esi + 8 * edx], eax
+dalej2:
+	inc edx
+	cmp edx, ecx
+	jb petla2
+
+	mov edx, 0
+	inc ecx
+	cmp ecx, [ebp + 12]
+	jb petla1
+
+
+
+	mov ecx, [ebp + 12]
+	dec ecx
+	mov edx, dword ptr [esi + 8 * ecx + 4]
+	mov eax, dword ptr [esi + 8 * ecx]
+
+	pop esi
+	pop ebp
+	ret
+_sortowanie ENDP
+
+END
+
+;for(int i = 0; i < n; i++)
+; for(int j = 0; j < i; j++)
+;  if(tab[i]>tab[j])
+;	swap
+
+
+;=====================
+#include <iostream>
+using namespace std;
+extern "C" unsigned __int64 sortowanie(unsigned __int64 * tabl, unsigned int n);
+
+int main()
+{	
+	unsigned __int64 tab[] = { 123,1255,1231, 2, 432 };
+	int n = sizeof(tab) / 8;
+	cout << sortowanie(tab, n) << endl;
+	for (int i = 0; i < n; i++)
+		cout << tab[i] << ", ";
+	return 0;}

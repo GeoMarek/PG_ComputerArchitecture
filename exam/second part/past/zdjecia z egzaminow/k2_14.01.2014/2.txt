@@ -1,0 +1,33 @@
+.686
+.model flat
+public _obj_stozka_sc
+
+.code
+_obj_stozka_sc PROC ; float obj_stozka_sc(float r, float R, float h);
+	push ebp
+	mov ebp, esp
+
+	finit
+	fld dword ptr [ebp + 8] ; r
+	fmul st(0), st(0) ; r^2
+	fld dword ptr [ebp + 12] ; R | r^2
+	fmul st(0), st(0) ; R^2 | r^2
+	fadd ; r^2+R^2
+	fld dword ptr [ebp + 8]
+	fld dword ptr [ebp + 12] ; R | r | r^2+R^2
+	fmul ; Rr | r^2 + R^2
+	fadd ; <ca³y nawias>
+	fld dword ptr [ebp + 16] ; h | nawias
+	fmul ; h*()
+	fldpi
+	fmul ; pi*h*()
+	push dword ptr 3
+	fild dword ptr [esp] ; 3 | pi*h*()
+	add esp, 4
+	fdiv ; V
+
+	pop ebp
+	ret
+_obj_stozka_sc ENDP
+
+END

@@ -1,0 +1,46 @@
+.686
+.model flat
+public _float_to_half
+
+.code
+_float_to_half PROC ; short float_to_half(float a);
+	push ebp
+	mov ebp, esp
+
+	mov edx, [ebp + 8] ; a
+	shl edx, 9 ; wyzerowanie wszystkiego poza mantys¹
+	shr edx, 22 ; pozostawienie 10 najbardziej znacz¹cych cyfr
+
+	mov eax, [ebp + 8] ; a
+	btr eax, 31 ; wyzerowanie znaku
+	shr eax, 23 ; eax - wyk³adnik
+	sub eax, 1023
+	add eax, 15 ; normalizacja wyk³adnika
+	shl eax, 10 ; wrzucenie wyk³adnika na odpowiednie bity
+	add eax, edx ; dodanie mantysy
+
+	btr eax, 15
+	mov edx, [ebp + 8] ; a
+	bt edx, 31 ; sprawdzenie znaku
+	jnc koniec
+	bts eax, 15
+koniec:
+	pop ebp
+	ret
+_float_to_half ENDP
+
+END
+
+
+
+;===============
+#include <iostream>
+#include <bitset>
+using namespace std;
+extern "C" short float_to_half(float a);
+
+int main()
+{	
+	auto x = bitset<16>(float_to_half(-2.0));
+	cout << x;
+	return 0;}

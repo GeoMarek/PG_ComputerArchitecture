@@ -1,0 +1,45 @@
+.686
+.model flat
+.xmm
+public _dziel16
+
+.code
+_dziel16 PROC ; float dziel16(float x);
+	push ebp
+	mov ebp, esp
+	mov ebx, [ebp + 8]
+
+	;== fragment begin
+	mov edx, ebx ; kopia
+	shr ebx, 23 ; wyk³adnik i znak
+	sub ebx, 4 ; wyk³adnik-4 = liczba>>4 = liczba/16
+	shl ebx, 23
+	and edx, 007fffffh ; 0000 0000 0111 1111 1111 1111 1111 1111b
+	add ebx, edx
+	;== fragment end
+
+
+	finit
+	push ebx
+	fld dword ptr [esp]
+	pop ebx
+
+	pop ebp
+	ret
+_dziel16 ENDP
+
+END
+
+;================
+
+#include <iostream>
+#include <bitset>
+#include <Windows.h>
+using namespace std;
+extern "C" float dziel16(float x);
+
+int main()
+{	
+	cout<<dziel16(123.0)<<endl<<123./16;
+
+	return 0;}
